@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<p class="judul">Angkatan Teknik Informatika Universitas Trunojoyo Madura 2024</p>
+<p class="nama">Ainur Raftuzzaki</p>
+<img class="fotoJ" width="400px" src="img/image.jpeg" alt="">
+<p class="background" width="300px" src="img/Wow.jpg" alt="">
+<p class="deskripsi">Hi, perkenalkan nama saya Ainur Raftuzzaki. Saya adalah mahasiswa Teknik Informatika di Universitas Trunojoyo Madura (UTM). Saya lahir di Nunukan pada tanggal 30 Maret tahun 2006. Saat ini saya ngekost di Kamal. Jika kalian membutuhkan sesuatu dari saya, Anda bisa menghubungi +6281352602516.</p>
+<p class="angkatan">DATA DIRI ANGKATAN</p>
+<div id="studentList"></div>
+<script>
+    // Fungsi untuk meng-generate list mahasiswa dari JSON
+    function generateStudentList(data) {
+        const studentList = document.getElementById('studentList');
+        data.forEach(student => {
+            const studentDiv = document.createElement('div');
+            studentDiv.innerHTML = `<div class="friend">
+        <div class="f-foto">
+            <img width="150px" class="fphoto" src="${student.fotoselfie}" alt="">
+        </div>
+        <div class="bio">
+            <table class="tb-data">
+                <tr>
+                    <td>Nama</td>
+                    <td>: ${student.nama}</td>
+                </tr>
+                <tr>
+                    <td>Nim</td>
+                    <td>: ${student.nim}</td>
+                </tr>
+                <tr>
+                    <td>Alamat</td>
+                    <td>: ${student.alamat}</td>
+                </tr>
+                <tr>
+                    <td>TTL</td>
+                    <td>: ${student.ttl}</td>
+                </tr>
+                <tr>
+                    <td>Telepon</td>
+                    <td>: ${student.no}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+            
+           `;
+
+            studentList.appendChild(studentDiv);
+        });
+    }
+
+    // Mengambil file JSON menggunakan fetch API
+    fetch('data.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => generateStudentList(data))
+        .catch(error => console.error('There was a problem with the fetch operation:', error));
+</script>
+
+</body>
+</html>
